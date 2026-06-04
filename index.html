@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MARIODEX</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f5f5f5;
+    padding:30px;
+}
+
+h1{
+    text-align:center;
+    color:#e63946;
+    font-size:4rem;
+    margin-bottom:25px;
+}
+
+h6{
+    text-align: center;
+    color: #e63946;
+     margin-top: 20px;
+}
+
+.buscador{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-bottom:40px;
+}
+
+input{
+    width:400px;
+    max-width:80%;
+    padding:12px;
+    border:2px solid #ccc;
+    border-radius:10px;
+    font-size:16px;
+}
+
+button{
+    padding:12px 20px;
+    border:none;
+    border-radius:10px;
+    background:#e63946;
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+}
+
+button:hover{
+    background:#c1121f;
+}
+
+.galeria{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+    max-width:1200px;
+    margin:auto;
+}
+
+.personaje{
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    cursor:pointer;
+    box-shadow:0 3px 10px rgba(0,0,0,.15);
+    transition:.2s;
+}
+
+.personaje:hover{
+    transform:translateY(-5px);
+}
+
+.personaje img{
+    height:200px;
+    object-fit:cover;
+    display: block;
+    margin: auto;
+
+}
+
+.personaje h3{
+    text-align:center;
+    padding:15px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>MARIODEX</h1>
+
+<div class="buscador">
+    <input
+        type="text"
+        id="busqueda"
+        placeholder="Buscar personaje..."
+        onkeyup="filtrar()"
+    >
+
+    <button onclick="buscar()">Buscar</button>
+</div>
+
+<div class="galeria">
+
+    <div class="personaje" onclick="location.href='mario.html'">
+        <img src="img/mario.png">
+        <h3>Mario</h3>
+    </div>
+
+    <div class="personaje" onclick="location.href='luigi.html'">
+        <img src="img/luigi.png">
+        <h3>Luigi</h3>
+    </div>
+
+    <div class="personaje" onclick="location.href='peach.html'">
+        <img src="img/peach.png">
+        <h3>Peach</h3>
+    </div>
+
+    <div class="personaje" onclick="location.href='bowser.html'">
+        <img src="img/bowser.png">
+        <h3>Bowser</h3>
+    </div>
+
+    <div class="personaje" onclick="location.href='yoshi.html'">
+        <img src="img/yoshi.png">
+        <h3>Yoshi</h3>
+    </div>
+
+    <div class="personaje" onclick="location.href='toad.html'">
+        <img src="img/toad.png">
+        <h3>Toad</h3>
+    </div>
+
+</div>
+
+<script>
+
+const personaje = {
+    mario: "mario.html",
+    luigi: "luigi.html",
+    peach: "peach.html",
+    bowser: "bowser.html",
+    yoshi: "yoshi.html",
+    toad: "toad.html"
+};
+
+function buscar(){
+
+    let nombre =
+        document.getElementById("busqueda")
+        .value
+        .trim()
+        .toLowerCase();
+
+    if(personaje[nombre]){
+        window.location.href = personaje[nombre];
+    }else{
+        window.location.href = "404.html";
+    }
+}
+
+function filtrar(){
+
+    let texto =
+        document.getElementById("busqueda")
+        .value
+        .toLowerCase();
+
+    let tarjetas =
+        document.querySelectorAll(".personaje");
+
+    tarjetas.forEach(tarjeta => {
+
+        let nombre =
+            tarjeta.querySelector("h3")
+            .textContent
+            .toLowerCase();
+
+        if(nombre.includes(texto)){
+            tarjeta.style.display = "block";
+        }else{
+            tarjeta.style.display = "none";
+        }
+    });
+}
+
+document
+.getElementById("busqueda")
+.addEventListener("keydown", function(event){
+
+    if(event.key === "Enter"){
+        buscar();
+    }
+
+});
+</script>
+
+ <h6>Proyecto académico realizado con fines educativos. Mario, Luigi, Peach y otros personajes relacionados son propiedad de Nintendo. Este sitio no está afiliado ni respaldado por Nintendo.</h6>
+
+ 
+</body>
+</html>
